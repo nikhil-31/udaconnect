@@ -1,0 +1,24 @@
+Architecture considerations
+
+# Breakup into microservices
+
+The monolith is broken up into three microservices as shown below
+
+1. The persons service
+2. The locations service
+3. The connections service
+
+
+# Reasoning for the breakup
+
+1. The persons service - It does not have many dependencies on the rest of the monolith. This service will use
+REST for message passing since it is used to render the front end.
+
+2. The locations service - The locations service does not have many dependencies to the rest of the monolith, it also collects 
+a large amount of location data from users, this data will be processed in an asynchronously using Kafka.
+Because of the large number of network calls which leads to an increased need for performance and 
+reduced bandwidth, this service will use GRPC for message passing.
+
+3. The connections services - This service will remain in the monolith,
+but since the other two microservices have been created this can be treated as a standalone microservice,
+This service will use REST for message passing, since it is used to render the frontend.
