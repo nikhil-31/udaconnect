@@ -7,7 +7,9 @@ import logging
 from config import DB_USERNAME, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD
 
 TOPIC_NAME = 'location'
-messages = KafkaConsumer(TOPIC_NAME, bootstrap_servers=['10.42.0.44:9092', '10.42.0.45:9092', '10.42.0.46:9092'])
+messages = KafkaConsumer(TOPIC_NAME, bootstrap_servers=['kafka-0.kafka-svc.default.svc.cluster.local:9092',
+                                                        'kafka-1.kafka-svc.default.svc.cluster.local:9092',
+                                                        'kafka-2.kafka-svc.default.svc.cluster.local:9092'])
 
 
 def _add_to_location(location: Dict):

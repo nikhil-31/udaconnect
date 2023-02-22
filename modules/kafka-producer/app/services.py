@@ -7,7 +7,9 @@ from concurrent import futures
 from json import dumps
 from kafka import KafkaProducer
 
-producer = KafkaProducer(bootstrap_servers=['10.42.0.44:9092', '10.42.0.45:9092', '10.42.0.46:9092'],
+producer = KafkaProducer(bootstrap_servers=['kafka-0.kafka-svc.default.svc.cluster.local:9092',
+                                            'kafka-1.kafka-svc.default.svc.cluster.local:9092',
+                                            'kafka-2.kafka-svc.default.svc.cluster.local:9092'],
                          value_serializer=lambda v: dumps(v).encode('utf-8'), api_version=(0, 10, 2))
 
 
